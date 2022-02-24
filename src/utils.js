@@ -75,7 +75,7 @@ function chillHop() {
         {
             name: "Bloom",
             cover:
-                "https://chillhop.com/wp-content/uploads/2022/01/d7c0bd347f56540babd9dd85454b93a89df84a15-1024x1024.jpg",
+                "https://chillhop.com/wp-content/uploads/2020/12/33a2a875828118a3ff260638a88362936104879a-1024x1024.jpg",
             artist: "Blue Wednesday, Shopan",
             audio: "https://mp3.chillhop.com/serve.php/?mp3=11235",
             color: ["#DBA5D0", "#B4A9DE"],

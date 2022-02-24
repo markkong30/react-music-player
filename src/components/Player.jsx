@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay, faPause, faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import { faPlay, faPause, faForward, faBackward, faShuffle, faVolumeXmark, faVolumeHigh } from '@fortawesome/free-solid-svg-icons'
 
 const Player = (props) => {
     const { currentSong, setCurrentSong, isPlaying, setIsPlaying, songs } = props;
@@ -8,7 +8,12 @@ const Player = (props) => {
     const [songInfo, setSongInfo] = useState({
         currentTime: 0,
         duration: 0,
+        volume: 0.5,
     })
+
+    const animationPercentage = (Math.round(songInfo.currentTime) / Math.round(songInfo.duration)) * 100;
+
+    const volumePercentage = (songInfo.volume * 100);
 
     const playSongHandler = () => {
         if (isPlaying) {
@@ -38,6 +43,13 @@ const Player = (props) => {
         setSongInfo({ ...songInfo, currentTime })
     }
 
+    const volumeHandler = e => {
+        const volume = e.target.value;
+        audio.current.volume = e.target.value;
+        console.log(volume)
+        setSongInfo({ ...songInfo, volume })
+    }
+
     const getTime = (time) => {
         return (
             Math.floor(time / 60) + ":" + ("0" + Math.floor(time % 60)).slice(-2)
@@ -46,7 +58,7 @@ const Player = (props) => {
 
     const skipHandler = (direction) => {
         const currentSongIndex = songs.findIndex(song => song == currentSong);
-        let index = direction == 'back' ? currentSongIndex - 1 : currentSongIndex + 1;
+        let index = (direction == 'back') ? currentSongIndex - 1 : currentSongIndex + 1;
         if (index < 0) {
             index = songs.length - 1;
         } else if (index > songs.length - 1) {
@@ -56,20 +68,38 @@ const Player = (props) => {
         return setCurrentSong(songs[index])
     }
 
+    const SLIDERSTYLE = {
+        background: `linear-gradient(to right, ${currentSong.color[0]}, ${currentSong.color[1]})`
+    }
+
     return (
         <div className='player'>
             <div className="time-control">
                 <p>{getTime(songInfo.currentTime)}</p>
-                <input type="range" min="0" max={songInfo.duration || "1"} value={songInfo.currentTime} onChange={dragHandler} />
+                <div style={SLIDERSTYLE} className="track">
+                    <input type="range" min="0" max={songInfo.duration || "1"} value={songInfo.currentTime} onChange={dragHandler} />
+                    <div className="animate-track" style={{ transform: `translateX(${animationPercentage}%)` }} ></div>
+                </div>
                 <p>{getTime(songInfo.duration)}</p>
             </div>
 
             <div className="play-control">
-                <FontAwesomeIcon className='skip-back' size="2x" icon={faAngleLeft} onClick={() => skipHandler('back')} />
+                <FontAwesomeIcon className='skip-back' size="2x" icon={faBackward} onClick={() => skipHandler('back')} />
                 <FontAwesomeIcon className='play' size="2x" icon={isPlaying ? faPause : faPlay} onClick={playSongHandler} />
-                <FontAwesomeIcon className='skip-forward' size="2x" icon={faAngleRight} onClick={() => skipHandler('forward')} />
+                <FontAwesomeIcon className='skip-forward' size="2x" icon={faForward} onClick={() => skipHandler('forward')} />
+                {/* <FontAwesomeIcon className='skip-forward' size="2x" icon={faShuffle} onClick={() => skipHandler('forward')} /> */}
             </div>
-            <audio onLoadedData={autoPlayHandler} onTimeUpdate={timeUpdateHandler} onLoadedMetadata={timeUpdateHandler} ref={audio} src={currentSong.audio} ></audio>
+
+            <div className="volume-control">
+                <FontAwesomeIcon className='volume-low' icon={faVolumeXmark} />
+                <div className="volume-bar track" style={SLIDERSTYLE}>
+                    <input type="range" min="0" max="1" step="0.1" value={songInfo.volume} onChange={volumeHandler} />
+                    <div className="animate-track" style={{ transform: `translateX(${volumePercentage}%)` }}></div>
+                </div>
+                <FontAwesomeIcon className='volume-high' icon={faVolumeHigh} />
+            </div>
+
+            <audio onLoadedData={autoPlayHandler} onTimeUpdate={timeUpdateHandler} onLoadedMetadata={timeUpdateHandler} onEnded={() => skipHandler('forward')} ref={audio} src={currentSong.audio} ></audio>
         </div>
     );
 };
