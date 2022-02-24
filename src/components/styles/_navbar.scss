@@ -17,6 +17,28 @@ nav {
             color: white;
         }
     }
+
+    .react-switch {
+        vertical-align: middle;
+        margin-left: 3rem;
+
+        .moon,
+        .sun {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            height: 100%;
+        }
+
+        .moon {
+            color: grey;
+        }
+
+        .sun {
+            color: orangered;
+        }
+    }
 }
 
 @media (max-width: 768px) {

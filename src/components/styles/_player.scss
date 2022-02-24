@@ -43,6 +43,7 @@
     align-items: center;
     padding: 0 1rem 1rem 1rem;
     width: 40%;
+    margin-left: -1rem;
 
     .volume-low,
     .volume-high {
@@ -50,7 +51,6 @@
     }
 
     .volume-bar {
-        // background: rgb(179, 24, 24);
         width: 100%;
         border-radius: 10px;
     }
@@ -115,6 +115,24 @@ input[type="range"]:focus {
     height: 100%;
     transform: translateX(0%);
     pointer-events: none;
+}
+
+@media (max-width: 1100px) {
+    .time-control {
+        width: 70%;
+    }
+
+    .play-control {
+        width: 50%;
+    }
+
+    .volume-control {
+        width: 60%;
+    }
+
+    .shuffle {
+        right: -3rem !important;
+    }
 }
 
 @media (max-width: 900px) {

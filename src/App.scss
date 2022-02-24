@@ -38,15 +38,55 @@ h3 {
   transition: all 0.5s ease-in-out;
 }
 
+.App.dark {
+  h1,
+  h2,
+  h3,
+  p,
+  span,
+  .skip-forward,
+  .skip-back,
+  .play,
+  .pause,
+  .volume-low,
+  .volume-high,
+  .shuffle,
+  .music {
+    color: white;
+  }
+
+  h4 {
+    color: rgb(211, 211, 211);
+  }
+
+  background-color: #181a27;
+
+  .library {
+    background-color: #181a27;
+  }
+
+  .library-song {
+    &:hover {
+      h3 {
+        color: rgb(100, 100, 100);
+      }
+
+      h4 {
+        color: black;
+      }
+    }
+  }
+}
+
 @media (min-width: 768px) {
   .library-active {
-    margin-left: 40%;
+    margin-left: 20rem;
   }
 }
 
 @media (min-width: 900px) {
   .library-active {
-    margin-left: 30%;
+    margin-left: 20rem;
   }
 }
 

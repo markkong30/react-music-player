@@ -11,11 +11,15 @@ function App() {
   const [currentSong, setCurrentSong] = useState(songs[0]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [libraryIsOpen, setLibraryIsOpen] = useState(false);
+  const [checked, setChecked] = useState(false);
 
 
   return (
-    <div className={`App ${libraryIsOpen ? "library-active" : ""}`}>
-      <Navbar libraryIsOpen={libraryIsOpen} setLibraryIsOpen={setLibraryIsOpen} />
+    <div className=
+      {`App ${libraryIsOpen ? "library-active" : ""}
+    ${checked ? "dark" : ""}
+    `}>
+      <Navbar libraryIsOpen={libraryIsOpen} setLibraryIsOpen={setLibraryIsOpen} checked={checked} setChecked={setChecked} />
       <Song currentSong={currentSong} />
       <Player currentSong={currentSong} setCurrentSong={setCurrentSong} isPlaying={isPlaying} setIsPlaying={setIsPlaying} songs={songs} />
       <Library songs={songs} setSongs={setSongs} setCurrentSong={setCurrentSong} currentSong={currentSong} libraryIsOpen={libraryIsOpen} setLibraryIsOpen={setLibraryIsOpen} />
