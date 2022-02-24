@@ -39,6 +39,7 @@
 
 .volume-control {
     display: flex;
+    position: relative;
     align-items: center;
     padding: 0 1rem 1rem 1rem;
     width: 40%;
@@ -49,9 +50,26 @@
     }
 
     .volume-bar {
-        background: rgb(204, 204, 204);
+        // background: rgb(179, 24, 24);
         width: 100%;
         border-radius: 10px;
+    }
+
+    .animate-track.volume {
+        background-color: rgb(233, 233, 233);
+    }
+
+    .shuffle {
+        position: absolute;
+        right: -4rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: grey;
+        padding: 1rem;
+
+        &:hover {
+            color: black;
+        }
     }
 
     input {
@@ -111,10 +129,18 @@ input[type="range"]:focus {
     .volume-control {
         width: 70%;
     }
+
+    .shuffle {
+        right: -3rem !important;
+    }
 }
 
 @media (max-width: 576px) {
     .time-control {
         width: 90%;
+    }
+    .shuffle {
+        font-size: 1rem !important;
+        right: -2rem !important;
     }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import LibrarySong from './LibrarySong';
 
 const Library = (props) => {
-    const { songs, currentSong, setCurrentSong, setSongs, libraryIsOpen } = props;
+    const { songs, currentSong, setCurrentSong, setSongs, libraryIsOpen, setLibraryIsOpen } = props;
 
     return (
         <div className={`library ${libraryIsOpen ? "open" : ""}`}>
@@ -10,7 +10,7 @@ const Library = (props) => {
             <div className="library-songs">
                 {songs.map(song => {
                     return (
-                        <LibrarySong key={song.id} song={song} songs={songs} setSongs={setSongs} setCurrentSong={setCurrentSong} currentSong={currentSong} />
+                        <LibrarySong key={song.id} song={song} songs={songs} setSongs={setSongs} setCurrentSong={setCurrentSong} currentSong={currentSong} setLibraryIsOpen={setLibraryIsOpen} />
                     )
                 })}
             </div>

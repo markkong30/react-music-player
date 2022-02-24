@@ -18,7 +18,7 @@ function App() {
       <Navbar libraryIsOpen={libraryIsOpen} setLibraryIsOpen={setLibraryIsOpen} />
       <Song currentSong={currentSong} />
       <Player currentSong={currentSong} setCurrentSong={setCurrentSong} isPlaying={isPlaying} setIsPlaying={setIsPlaying} songs={songs} />
-      <Library songs={songs} setSongs={setSongs} setCurrentSong={setCurrentSong} currentSong={currentSong} libraryIsOpen={libraryIsOpen} />
+      <Library songs={songs} setSongs={setSongs} setCurrentSong={setCurrentSong} currentSong={currentSong} libraryIsOpen={libraryIsOpen} setLibraryIsOpen={setLibraryIsOpen} />
     </div>
   );
 }

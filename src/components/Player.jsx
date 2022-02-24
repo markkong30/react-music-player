@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPause, faForward, faBackward, faShuffle, faVolumeXmark, faVolumeHigh } from '@fortawesome/free-solid-svg-icons'
 
@@ -10,6 +10,10 @@ const Player = (props) => {
         duration: 0,
         volume: 0.5,
     })
+
+    useEffect(() => {
+        setSongInfo({ ...songInfo, currentTime: 0 })
+    }, [currentSong])
 
     const animationPercentage = (Math.round(songInfo.currentTime) / Math.round(songInfo.duration)) * 100;
 
@@ -50,6 +54,12 @@ const Player = (props) => {
         setSongInfo({ ...songInfo, volume })
     }
 
+    const randomShuffle = () => {
+        const randomIndex = Math.floor(Math.random() * songs.length);
+        setCurrentSong(songs[randomIndex]);
+
+    }
+
     const getTime = (time) => {
         return (
             Math.floor(time / 60) + ":" + ("0" + Math.floor(time % 60)).slice(-2)
@@ -87,16 +97,17 @@ const Player = (props) => {
                 <FontAwesomeIcon className='skip-back' size="2x" icon={faBackward} onClick={() => skipHandler('back')} />
                 <FontAwesomeIcon className='play' size="2x" icon={isPlaying ? faPause : faPlay} onClick={playSongHandler} />
                 <FontAwesomeIcon className='skip-forward' size="2x" icon={faForward} onClick={() => skipHandler('forward')} />
-                {/* <FontAwesomeIcon className='skip-forward' size="2x" icon={faShuffle} onClick={() => skipHandler('forward')} /> */}
             </div>
 
             <div className="volume-control">
                 <FontAwesomeIcon className='volume-low' icon={faVolumeXmark} />
                 <div className="volume-bar track" style={SLIDERSTYLE}>
                     <input type="range" min="0" max="1" step="0.1" value={songInfo.volume} onChange={volumeHandler} />
-                    <div className="animate-track" style={{ transform: `translateX(${volumePercentage}%)` }}></div>
+                    <div className="animate-track volume" style={{ transform: `translateX(${volumePercentage}%)` }}></div>
                 </div>
                 <FontAwesomeIcon className='volume-high' icon={faVolumeHigh} />
+                <FontAwesomeIcon className='shuffle' icon={faShuffle} onClick={randomShuffle} />
+
             </div>
 
             <audio onLoadedData={autoPlayHandler} onTimeUpdate={timeUpdateHandler} onLoadedMetadata={timeUpdateHandler} onEnded={() => skipHandler('forward')} ref={audio} src={currentSong.audio} ></audio>

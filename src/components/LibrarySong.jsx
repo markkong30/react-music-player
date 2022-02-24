@@ -1,10 +1,14 @@
 import React from 'react';
 
 const LibrarySong = (props) => {
-    const { song, songs, setCurrentSong, setSongs, currentSong } = props;
+    const { song, songs, setCurrentSong, setSongs, currentSong, setLibraryIsOpen } = props;
 
     const songSelectHandler = () => {
         setCurrentSong(song);
+
+        if (window.innerWidth <= 768) {
+            setLibraryIsOpen(false);
+        }
 
         // for (const songEle of songs) {
         //     if (songEle == song) {

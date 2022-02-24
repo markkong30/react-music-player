@@ -49,3 +49,13 @@ h3 {
     margin-left: 30%;
   }
 }
+
+@media (max-width: 768px) {
+  .library-active {
+    nav {
+      button {
+        display: none;
+      }
+    }
+  }
+}
