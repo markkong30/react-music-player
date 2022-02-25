@@ -12,7 +12,8 @@ const Player = (props) => {
     })
 
     useEffect(() => {
-        setSongInfo({ ...songInfo, currentTime: 0 })
+        setSongInfo({ ...songInfo, currentTime: 0 });
+        autoPlayHandler();
     }, [currentSong])
 
     const animationPercentage = (Math.round(songInfo.currentTime) / Math.round(songInfo.duration)) * 100;
@@ -57,7 +58,7 @@ const Player = (props) => {
 
     const randomShuffle = () => {
         const randomIndex = Math.floor(Math.random() * songs.length);
-        setCurrentSong(songs[randomIndex], autoPlayHandler());
+        setCurrentSong(songs[randomIndex]);
 
     }
 
@@ -76,8 +77,7 @@ const Player = (props) => {
             index = 0;
         }
 
-        return setCurrentSong(songs[index], autoPlayHandler()
-        )
+        return setCurrentSong(songs[index])
     }
 
     const SLIDERSTYLE = {
