@@ -29,9 +29,10 @@ const Player = (props) => {
         }
     }
 
-    const autoPlayHandler = () => {
+    const autoPlayHandler = async () => {
         if (isPlaying) {
-            audio.current.play();
+            await audio.current.load();
+            await audio.current.play();
         }
     }
 
@@ -56,7 +57,7 @@ const Player = (props) => {
 
     const randomShuffle = () => {
         const randomIndex = Math.floor(Math.random() * songs.length);
-        setCurrentSong(songs[randomIndex]);
+        setCurrentSong(songs[randomIndex], autoPlayHandler());
 
     }
 
@@ -75,7 +76,8 @@ const Player = (props) => {
             index = 0;
         }
 
-        return setCurrentSong(songs[index])
+        return setCurrentSong(songs[index], autoPlayHandler()
+        )
     }
 
     const SLIDERSTYLE = {
@@ -110,7 +112,7 @@ const Player = (props) => {
 
             </div>
 
-            <audio onCanPlay={autoPlayHandler} onTimeUpdate={timeUpdateHandler} onLoadedMetadata={timeUpdateHandler} onEnded={() => skipHandler('forward')} ref={audio} src={currentSong.audio} ></audio>
+            <audio onCanPlay={null} onTimeUpdate={timeUpdateHandler} onLoadedMetadata={timeUpdateHandler} onEnded={() => skipHandler('forward')} ref={audio} src={currentSong.audio} ></audio>
         </div>
     );
 };

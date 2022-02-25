@@ -10,12 +10,6 @@ const LibrarySong = (props) => {
             setLibraryIsOpen(false);
         }
 
-        // for (const songEle of songs) {
-        //     if (songEle == song) {
-        //         songEle.active = true;
-        //     } else songEle.active = false;
-        // }
-
     }
 
     return (
