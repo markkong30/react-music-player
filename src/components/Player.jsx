@@ -110,7 +110,7 @@ const Player = (props) => {
 
             </div>
 
-            <audio onLoadedData={autoPlayHandler} onTimeUpdate={timeUpdateHandler} onLoadedMetadata={timeUpdateHandler} onEnded={() => skipHandler('forward')} ref={audio} src={currentSong.audio} ></audio>
+            <audio onCanPlay={autoPlayHandler} onTimeUpdate={timeUpdateHandler} onLoadedMetadata={timeUpdateHandler} onEnded={() => skipHandler('forward')} ref={audio} src={currentSong.audio} ></audio>
         </div>
     );
 };
